@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import Layout from '../layout';
 import HomePage from '../home';
 import AboutPage from '../about';
 import CoursesPage from '../courses';
-
 import PageNotFound from '../PageNotFound';
 
 export default function App() {
   return (
-    <>
+    <Layout>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/about" component={AboutPage} />
@@ -17,6 +17,6 @@ export default function App() {
 
         <Route component={PageNotFound} />
       </Switch>
-    </>
+    </Layout>
   );
 }
