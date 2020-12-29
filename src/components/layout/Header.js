@@ -25,14 +25,14 @@ export default function Header() {
 
           {' | '}
 
-          <NavLink to="/about" activeStyle={activeStyle}>
-            About
+          <NavLink to="/courses" activeStyle={activeStyle}>
+            Courses
           </NavLink>
 
           {' | '}
 
-          <NavLink to="/courses" activeStyle={activeStyle}>
-            Courses
+          <NavLink to="/about" activeStyle={activeStyle}>
+            About
           </NavLink>
         </Box>
 

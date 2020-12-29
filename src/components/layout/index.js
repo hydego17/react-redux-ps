@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container } from '@chakra-ui/react';
+
 import Header from './Header';
 import Footer from './Footer';
-import { Container } from '@chakra-ui/react';
 
 export default function Layout({ children }) {
   return (
