@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Button, Container } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 
 import { NavLink } from 'react-router-dom';
 import { ColorModeSwitcher } from '../../themes/ColorModeSwitcher';
