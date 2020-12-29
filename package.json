@@ -2,7 +2,10 @@
   "name": "react-redux-ps",
   "description": "React and Redux practice",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000"
+    "prestart:api": "node tools/createMockDb.js",
+    "start:api": "node tools/apiServer.js",
+    "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "start": "concurrently yarn:start:*"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.0.4",
@@ -26,6 +29,7 @@
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
     "babel-preset-react-app": "7.0.2",
+    "concurrently": "^5.3.0",
     "css-loader": "2.1.1",
     "cssnano": "4.1.10",
     "enzyme": "3.9.0",
