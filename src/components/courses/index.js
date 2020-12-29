@@ -4,11 +4,21 @@ import * as coursesActions from '../../redux/actions/courseActions';
 
 import PropTypes from 'prop-types';
 
-import { Heading, Divider } from '@chakra-ui/react';
+import {
+  Heading,
+  Divider,
+  Box,
+  Text,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+} from '@chakra-ui/react';
 
 class CoursesPage extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    courses: PropTypes.array,
   };
 
   state = {
@@ -34,15 +44,31 @@ class CoursesPage extends Component {
         <Heading>Courses</Heading>
         <Divider my={6} />
 
-        <form onSubmit={this.handleSubmit}>
-          <h2>Add Course</h2>
-          <input
-            type="text"
-            onChange={this.handleChange}
-            value={this.state.course.title}
-          />
-          <input type="submit" value="Save" />
-        </form>
+        <Box as="form" onSubmit={this.handleSubmit} py={6}>
+          <FormControl>
+            <FormLabel>Add Course</FormLabel>
+            <Input
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.course.title}
+            />
+          </FormControl>
+          <Button my={4} type="submit">
+            Save
+          </Button>
+        </Box>
+
+        <Box py={6} px={4} border="1px solid #ededed" rounded="md">
+          {this.props.courses.length ? (
+            this.props.courses.map((course, idx) => (
+              <Box key={idx} py={2} borderBottom="1px solid #ededed">
+                <Text>{course.title} </Text>
+              </Box>
+            ))
+          ) : (
+            <Text>No courses available </Text>
+          )}
+        </Box>
       </>
     );
   }
