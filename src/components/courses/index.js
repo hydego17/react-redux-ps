@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as coursesActions from '../../redux/actions/courseActions';
+import { bindActionCreators } from 'redux';
 
 import PropTypes from 'prop-types';
 
@@ -16,11 +17,6 @@ import {
 } from '@chakra-ui/react';
 
 class CoursesPage extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    courses: PropTypes.array,
-  };
-
   state = {
     course: {
       title: '',
@@ -35,7 +31,8 @@ class CoursesPage extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(coursesActions.createCourse(this.state.course));
+    this.props.actions.createCourse(this.state.course);
+    this.setState({ course: { title: '' } });
   };
 
   render() {
@@ -74,10 +71,21 @@ class CoursesPage extends Component {
   }
 }
 
+CoursesPage.propTypes = {
+  courses: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     courses: state.courses,
   };
 }
 
-export default connect(mapStateToProps)(CoursesPage);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(coursesActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
