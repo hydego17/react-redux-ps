@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as coursesActions from '../../redux/actions/courseActions';
-
 import PropTypes from 'prop-types';
+
+// Redux actions
+import * as courseAction from '../../redux/actions/courseActions';
+import * as authorActions from '../../redux/actions/authorActions';
 
 import {
   Heading,
@@ -37,10 +39,14 @@ class CoursesPage extends Component {
   //   this.setState({ course: { title: '' } });
   // };
 
-  componentDidMount(){
-    this.props.actions.loadCourses().catch(error => {
-      alert("Loading courses failed " + error)
-    })
+  componentDidMount() {
+    this.props.actions.loadCourses().catch((error) => {
+      alert('Loading courses failed ' + error);
+    });
+
+    this.props.actions.loadAuthors().catch((error) => {
+      alert('Loading authors failed ' + error);
+    });
   }
 
   render() {
@@ -70,7 +76,7 @@ class CoursesPage extends Component {
             //     <Text>{course.title} </Text>
             //   </Box>
             // ))
-            <CourseList courses={this.props.courses}/>
+            <CourseList courses={this.props.courses} />
           ) : (
             <Text>No courses available </Text>
           )}
@@ -87,13 +93,26 @@ CoursesPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    courses: state.courses,
+    courses:
+      state.authors.length === 0
+        ? []
+        : state.courses.map((course) => {
+            return {
+              ...course,
+              authorName: state.authors.find((a) => a.id === course.authorId)
+                .name,
+            };
+          }),
+    authors: state.authors,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(coursesActions, dispatch),
+    actions: {
+      loadCourses: bindActionCreators(courseAction.loadCourses, dispatch),
+      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
+    },
   };
 }
 

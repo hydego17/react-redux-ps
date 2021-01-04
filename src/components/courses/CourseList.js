@@ -35,11 +35,15 @@ const CourseList = ({ courses }) => (
               </Button>
             </Td>
             <Td>
-              <ChakraLink as={ReactLink} to={'/course/' + course.slug} color="teal.600" >
+              <ChakraLink
+                as={ReactLink}
+                to={'/course/' + course.slug}
+                color="teal.600"
+              >
                 {course.title}
               </ChakraLink>
             </Td>
-            <Td>{course.authorId}</Td>
+            <Td>{course.authorName}</Td>
             <Td>{course.category}</Td>
           </Tr>
         );
