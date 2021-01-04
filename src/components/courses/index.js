@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as coursesActions from '../../redux/actions/courseActions';
-import { bindActionCreators } from 'redux';
 
 import PropTypes from 'prop-types';
 
@@ -15,6 +15,8 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react';
+
+import CourseList from './CourseList';
 
 class CoursesPage extends Component {
   // state = {
@@ -61,13 +63,14 @@ class CoursesPage extends Component {
           </Button>
         </Box> */}
 
-        <Box py={6} px={4} border="1px solid #ededed" rounded="md">
+        <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
           {this.props.courses.length ? (
-            this.props.courses.map((course, idx) => (
-              <Box key={idx} py={2} borderBottom="1px solid #ededed">
-                <Text>{course.title} </Text>
-              </Box>
-            ))
+            // this.props.courses.map((course, idx) => (
+            //   <Box key={idx} py={2} borderBottom="1px solid #ededed">
+            //     <Text>{course.title} </Text>
+            //   </Box>
+            // ))
+            <CourseList courses={this.props.courses}/>
           ) : (
             <Text>No courses available </Text>
           )}
