@@ -17,23 +17,29 @@ import {
 } from '@chakra-ui/react';
 
 class CoursesPage extends Component {
-  state = {
-    course: {
-      title: '',
-    },
-  };
+  // state = {
+  //   course: {
+  //     title: '',
+  //   },
+  // };
 
-  handleChange = (e) => {
-    const course = { ...this.state.course, title: e.target.value };
+  // handleChange = (e) => {
+  //   const course = { ...this.state.course, title: e.target.value };
 
-    this.setState({ course });
-  };
+  //   this.setState({ course });
+  // };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.actions.createCourse(this.state.course);
-    this.setState({ course: { title: '' } });
-  };
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   this.props.actions.createCourse(this.state.course);
+  //   this.setState({ course: { title: '' } });
+  // };
+
+  componentDidMount(){
+    this.props.actions.loadCourses().catch(error => {
+      alert("Loading courses failed " + error)
+    })
+  }
 
   render() {
     return (
@@ -41,7 +47,7 @@ class CoursesPage extends Component {
         <Heading>Courses</Heading>
         <Divider my={6} />
 
-        <Box as="form" onSubmit={this.handleSubmit} py={6}>
+        {/* <Box as="form" onSubmit={this.handleSubmit} py={6}>
           <FormControl>
             <FormLabel>Add Course</FormLabel>
             <Input
@@ -53,7 +59,7 @@ class CoursesPage extends Component {
           <Button my={4} type="submit">
             Save
           </Button>
-        </Box>
+        </Box> */}
 
         <Box py={6} px={4} border="1px solid #ededed" rounded="md">
           {this.props.courses.length ? (
