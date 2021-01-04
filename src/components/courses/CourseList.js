@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link as ReactLink } from 'react-router-dom';
 
-import { Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Button,
+  Link as ChakraLink,
+} from '@chakra-ui/react';
 
 const CourseList = ({ courses }) => (
   <Table variant="simple">
@@ -20,16 +29,15 @@ const CourseList = ({ courses }) => (
           <Tr key={course.id}>
             <Td>
               <Button>
-                <a
-                  className="btn btn-light"
-                  href={'http://pluralsight.com/courses/' + course.slug}
-                >
+                <a href={'http://pluralsight.com/courses/' + course.slug}>
                   Watch
                 </a>
               </Button>
             </Td>
             <Td>
-              <Link to={'/course/' + course.slug}>{course.title}</Link>
+              <ChakraLink as={ReactLink} to={'/course/' + course.slug} color="teal.600" >
+                {course.title}
+              </ChakraLink>
             </Td>
             <Td>{course.authorId}</Td>
             <Td>{course.category}</Td>
