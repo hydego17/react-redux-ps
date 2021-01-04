@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,40 +8,17 @@ import PropTypes from 'prop-types';
 import * as courseAction from '../../redux/actions/courseActions';
 import * as authorActions from '../../redux/actions/authorActions';
 
-import {
-  Heading,
-  Divider,
-  Box,
-  Text,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-} from '@chakra-ui/react';
+import { Heading, Divider, Box, Text, Flex, Button } from '@chakra-ui/react';
 
 import CourseList from './CourseList';
 
 class CoursesPage extends Component {
-  // state = {
-  //   course: {
-  //     title: '',
-  //   },
-  // };
-
-  // handleChange = (e) => {
-  //   const course = { ...this.state.course, title: e.target.value };
-
-  //   this.setState({ course });
-  // };
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.actions.createCourse(this.state.course);
-  //   this.setState({ course: { title: '' } });
-  // };
+  state = {
+    redirectToAddCoursePage: false,
+  };
 
   componentDidMount() {
-    const {courses, authors, actions} = this.props;
+    const { courses, authors, actions } = this.props;
 
     if (courses.length === 0) {
       actions.loadCourses().catch((error) => {
@@ -58,30 +36,21 @@ class CoursesPage extends Component {
   render() {
     return (
       <>
-        <Heading>Courses</Heading>
-        <Divider my={6} />
+        {/* Redirect to  */}
+        {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
 
-        {/* <Box as="form" onSubmit={this.handleSubmit} py={6}>
-          <FormControl>
-            <FormLabel>Add Course</FormLabel>
-            <Input
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.course.title}
-            />
-          </FormControl>
-          <Button my={4} type="submit">
-            Save
+        <Flex justify="space-between" align="center">
+          <Heading>Courses</Heading>
+          <Button
+            onClick={() => this.setState({ redirectToAddCoursePage: true })}
+          >
+            Add Course
           </Button>
-        </Box> */}
+        </Flex>
+        <Divider my={6} />
 
         <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
           {this.props.courses.length ? (
-            // this.props.courses.map((course, idx) => (
-            //   <Box key={idx} py={2} borderBottom="1px solid #ededed">
-            //     <Text>{course.title} </Text>
-            //   </Box>
-            // ))
             <CourseList courses={this.props.courses} />
           ) : (
             <Text>No courses available </Text>
