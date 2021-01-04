@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as coursesActions from '../../redux/actions/courseActions';
 import { bindActionCreators } from 'redux';
-
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+// Redux actions
+import * as courseAction from '../../redux/actions/courseActions';
+import * as authorActions from '../../redux/actions/authorActions';
 
 import {
   Heading,
@@ -15,6 +17,8 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react';
+
+import CourseList from './CourseList';
 
 class CoursesPage extends Component {
   // state = {
@@ -35,10 +39,20 @@ class CoursesPage extends Component {
   //   this.setState({ course: { title: '' } });
   // };
 
-  componentDidMount(){
-    this.props.actions.loadCourses().catch(error => {
-      alert("Loading courses failed " + error)
-    })
+  componentDidMount() {
+    const {courses, authors, actions} = this.props;
+
+    if (courses.length === 0) {
+      actions.loadCourses().catch((error) => {
+        alert('Loading courses failed ' + error);
+      });
+    }
+
+    if (authors.length === 0) {
+      actions.loadAuthors().catch((error) => {
+        alert('Loading authors failed ' + error);
+      });
+    }
   }
 
   render() {
@@ -61,13 +75,14 @@ class CoursesPage extends Component {
           </Button>
         </Box> */}
 
-        <Box py={6} px={4} border="1px solid #ededed" rounded="md">
+        <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
           {this.props.courses.length ? (
-            this.props.courses.map((course, idx) => (
-              <Box key={idx} py={2} borderBottom="1px solid #ededed">
-                <Text>{course.title} </Text>
-              </Box>
-            ))
+            // this.props.courses.map((course, idx) => (
+            //   <Box key={idx} py={2} borderBottom="1px solid #ededed">
+            //     <Text>{course.title} </Text>
+            //   </Box>
+            // ))
+            <CourseList courses={this.props.courses} />
           ) : (
             <Text>No courses available </Text>
           )}
@@ -79,18 +94,32 @@ class CoursesPage extends Component {
 
 CoursesPage.propTypes = {
   courses: PropTypes.array,
+  authors: PropTypes.array,
   actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    courses: state.courses,
+    courses:
+      state.authors.length === 0
+        ? []
+        : state.courses.map((course) => {
+            return {
+              ...course,
+              authorName: state.authors.find((a) => a.id === course.authorId)
+                .name,
+            };
+          }),
+    authors: state.authors,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(coursesActions, dispatch),
+    actions: {
+      loadCourses: bindActionCreators(courseAction.loadCourses, dispatch),
+      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
+    },
   };
 }
 
