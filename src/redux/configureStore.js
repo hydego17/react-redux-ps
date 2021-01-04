@@ -8,5 +8,9 @@ export default function configureStore(initialState) {
 
   const enhancers = applyMiddleware(reduxISI());
 
-  return createStore(rootReducer, initialState, composeEnhancers(enhancers));
+  return createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(enhancers)
+  );
 }
