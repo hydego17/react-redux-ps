@@ -40,13 +40,19 @@ class CoursesPage extends Component {
   // };
 
   componentDidMount() {
-    this.props.actions.loadCourses().catch((error) => {
-      alert('Loading courses failed ' + error);
-    });
+    const {courses, authors, actions} = this.props;
 
-    this.props.actions.loadAuthors().catch((error) => {
-      alert('Loading authors failed ' + error);
-    });
+    if (courses.length === 0) {
+      actions.loadCourses().catch((error) => {
+        alert('Loading courses failed ' + error);
+      });
+    }
+
+    if (authors.length === 0) {
+      actions.loadAuthors().catch((error) => {
+        alert('Loading authors failed ' + error);
+      });
+    }
   }
 
   render() {
@@ -88,6 +94,7 @@ class CoursesPage extends Component {
 
 CoursesPage.propTypes = {
   courses: PropTypes.array,
+  authors: PropTypes.array,
   actions: PropTypes.object.isRequired,
 };
 
