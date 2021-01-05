@@ -19,24 +19,26 @@ const CourseForm = ({
   saving = false,
   errors = {},
 }) => {
-
-
   const toast = useToast();
 
   // Error warning
   useEffect(() => {
-    errors.onSave &&
-      toast({
-        title: errors.onSave,
+    for (const [key, value] of Object.entries(errors)) {
+      console.log(`${key}: ${value}`);
+
+       toast({
+        title: value,
         status: 'warning',
         duration: 3000,
         isClosable: true,
-      });
-  }, [errors, errors.onSave]);
+      })
+    }
+
+  }, [errors]);
 
   return (
     <Box as="form" onSubmit={onSave}>
-      <Heading as="h2" size="lg" py={4} >
+      <Heading as="h2" size="lg" py={4}>
         {course.id ? 'Edit' : 'Add'} Course
       </Heading>
 
@@ -45,6 +47,7 @@ const CourseForm = ({
         <Input
           name="title"
           type="text"
+          isInvalid={errors.title}
           onChange={onChange}
           value={course.title}
         />
@@ -55,6 +58,7 @@ const CourseForm = ({
         <Select
           name="authorId"
           placeholder="Select author"
+          isInvalid={errors.authorId}
           value={course.authorId || ''}
           onChange={onChange}
         >
@@ -71,6 +75,7 @@ const CourseForm = ({
         <Input
           name="category"
           type="text"
+          isInvalid={errors.category}
           onChange={onChange}
           value={course.category}
         />
