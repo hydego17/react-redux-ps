@@ -67,7 +67,7 @@ class CoursesPage extends Component {
         {this.props.loading ? (
           <PreLoader />
         ) : (
-          <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
+          <Box py={2} px={4} border="1px solid #ededed" rounded="xl" overflowX="auto" >
             {this.props.courses.length ? (
               <CourseList
                 courses={this.props.courses}
