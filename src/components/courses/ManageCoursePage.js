@@ -98,7 +98,7 @@ function ManageCoursePage({
 
       {/* WARNING: the logic below will result in Loader keep spinning if there is no course / author available. Which means that you cant add / edit the course */}
 
-      {/* {checkIsLoaded ? (
+      {checkIsLoaded ? (
         <PreLoader />
       ) : (
         <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
@@ -111,9 +111,11 @@ function ManageCoursePage({
             saving={saving}
           />
         </Box>
-      )} */}
+      )}
 
-      <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
+      {/* This is the default render with no loading spinner */}
+
+      {/* <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
         <CourseForm
           course={course}
           authors={authors}
@@ -122,7 +124,7 @@ function ManageCoursePage({
           onSave={handleSave}
           saving={saving}
         />
-      </Box>
+      </Box> */}
     </>
   );
 }
