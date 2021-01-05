@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 import CourseList from './CourseList';
-import PreLoader from '../common/preloader'
+import PreLoader from '../common/preloader';
 
 class CoursesPage extends Component {
   state = {
@@ -41,6 +41,10 @@ class CoursesPage extends Component {
     }
   }
 
+  // handleDeleteCourse = (course) => {
+  //   this.props.actions.deleteCourse(course);
+  // };
+
   render() {
     return (
       <>
@@ -61,13 +65,14 @@ class CoursesPage extends Component {
         <Divider my={6} />
 
         {this.props.loading ? (
-
-          <PreLoader/>
-
+          <PreLoader />
         ) : (
           <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
             {this.props.courses.length ? (
-              <CourseList courses={this.props.courses} />
+              <CourseList
+                courses={this.props.courses}
+                deleteCourse={this.props.actions.deleteCourse}
+              />
             ) : (
               <Text>No courses available </Text>
             )}
@@ -106,6 +111,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadCourses: bindActionCreators(courseAction.loadCourses, dispatch),
+      deleteCourse: bindActionCreators(courseAction.deleteCourse, dispatch),
       loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
     },
   };
