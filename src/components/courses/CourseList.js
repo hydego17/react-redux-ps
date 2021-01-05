@@ -23,13 +23,23 @@ const CourseList = ({ courses, deleteCourse }) => {
 
   function onDeleteClick(course) {
     confirm('are u sure') &&
-      deleteCourse(course) &&
-      toast({
-        title: 'Course Deleted',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
+      deleteCourse(course)
+        .then(() => {
+          toast({
+            title: 'Course Deleted',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          toast({
+            title: error.message,
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          });
+        });
   }
 
   return (
