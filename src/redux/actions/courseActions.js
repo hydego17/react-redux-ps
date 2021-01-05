@@ -33,12 +33,14 @@ export function loadCourses() {
         dispatch(loadCoursesSuccess(courses));
       })
       .catch((error) => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
 }
 
 export function saveCourse(course) {
+  // eslint-disable-next-line no-unused-vars
   return function (dispatch, getState) {
     dispatch(beginApiCall());
 
