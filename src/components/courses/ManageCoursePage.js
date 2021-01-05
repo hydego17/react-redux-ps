@@ -7,10 +7,11 @@ import * as courseAction from '../../redux/actions/courseActions';
 import * as authorActions from '../../redux/actions/authorActions';
 
 // Chakra Comps
-import { Heading, Divider, Box } from '@chakra-ui/react';
+import { Heading, Divider, Box, useToast } from '@chakra-ui/react';
 
 import { newCourse } from '../../../tools/mockData';
 import CourseForm from './CourseForm';
+import PreLoader from '../common/preloader';
 
 function ManageCoursePage({
   courses,
@@ -23,6 +24,7 @@ function ManageCoursePage({
 }) {
   const [course, setCourse] = useState({ ...props.course });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (courses.length === 0) {
@@ -49,27 +51,50 @@ function ManageCoursePage({
     }));
   }
 
+  const toast = useToast();
+
   function handleSave(e) {
     e.preventDefault();
-    saveCourse(course).then(() => {
-      history.push('/courses');
-    });
+
+    setSaving(true);
+
+    saveCourse(course)
+      .then(() => {
+        toast({
+          title: 'Course Saved',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+        history.push('/courses');
+      })
+      .catch((error) => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
+
+  const checkIsLoaded = authors.length === 0 || courses.length === 0;
 
   return (
     <>
       <Heading>Manage Course</Heading>
       <Divider my={6} />
 
-      <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
-        <CourseForm
-          course={course}
-          authors={authors}
-          errors={errors}
-          onChange={handleChange}
-          onSave={handleSave}
-        />
-      </Box>
+      {checkIsLoaded ? (
+        <PreLoader />
+      ) : (
+        <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
+          <CourseForm
+            course={course}
+            authors={authors}
+            errors={errors}
+            onChange={handleChange}
+            onSave={handleSave}
+            saving={saving}
+          />
+        </Box>
+      )}
     </>
   );
 }
@@ -90,7 +115,10 @@ export function getCourseBySlug(courses, slug) {
 
 function mapStateToProps(state, ownProps) {
   const slug = ownProps.match.params.slug;
-  const course = slug ? getCourseBySlug(state.courses, slug) : newCourse;
+  const course =
+    slug && state.courses.length > 0
+      ? getCourseBySlug(state.courses, slug)
+      : newCourse;
 
   return {
     course,

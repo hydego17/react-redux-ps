@@ -1,17 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
   Heading,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  CloseButton,
   Input,
   FormControl,
   FormLabel,
   Button,
   Select,
+  useToast,
 } from '@chakra-ui/react';
 
 const CourseForm = ({
@@ -22,19 +19,26 @@ const CourseForm = ({
   saving = false,
   errors = {},
 }) => {
+
+
+  const toast = useToast();
+
+  // Error warning
+  useEffect(() => {
+    errors.onSave &&
+      toast({
+        title: errors.onSave,
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+  }, [errors, errors.onSave]);
+
   return (
     <Box as="form" onSubmit={onSave}>
-      <Heading as="h2" size="md">
+      <Heading as="h2" size="lg" py={4} >
         {course.id ? 'Edit' : 'Add'} Course
       </Heading>
-
-      {errors.onSave && (
-        <Alert status="error">
-          <AlertIcon />
-          <AlertTitle mr={2}> {errors.onSave}</AlertTitle>
-          <CloseButton position="absolute" right="8px" top="8px" />
-        </Alert>
-      )}
 
       <FormControl>
         <FormLabel>Title</FormLabel>

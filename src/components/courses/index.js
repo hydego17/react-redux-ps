@@ -8,9 +8,17 @@ import PropTypes from 'prop-types';
 import * as courseAction from '../../redux/actions/courseActions';
 import * as authorActions from '../../redux/actions/authorActions';
 
-import { Heading, Divider, Box, Text, Flex, Button } from '@chakra-ui/react';
+import {
+  Heading,
+  Divider,
+  Box,
+  Text,
+  Flex,
+  Button,
+} from '@chakra-ui/react';
 
 import CourseList from './CourseList';
+import PreLoader from '../common/preloader'
 
 class CoursesPage extends Component {
   state = {
@@ -40,7 +48,10 @@ class CoursesPage extends Component {
         {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
 
         <Flex justify="space-between" align="center">
-          <Heading>Courses</Heading>
+          <Flex align="center">
+            <Heading pr={6}>Courses</Heading>
+          </Flex>
+
           <Button
             onClick={() => this.setState({ redirectToAddCoursePage: true })}
           >
@@ -49,13 +60,19 @@ class CoursesPage extends Component {
         </Flex>
         <Divider my={6} />
 
-        <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
-          {this.props.courses.length ? (
-            <CourseList courses={this.props.courses} />
-          ) : (
-            <Text>No courses available </Text>
-          )}
-        </Box>
+        {this.props.loading ? (
+
+          <PreLoader/>
+
+        ) : (
+          <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
+            {this.props.courses.length ? (
+              <CourseList courses={this.props.courses} />
+            ) : (
+              <Text>No courses available </Text>
+            )}
+          </Box>
+        )}
       </>
     );
   }
@@ -65,6 +82,7 @@ CoursesPage.propTypes = {
   courses: PropTypes.array,
   authors: PropTypes.array,
   actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -80,6 +98,7 @@ function mapStateToProps(state) {
             };
           }),
     authors: state.authors,
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
