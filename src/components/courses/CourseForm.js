@@ -26,14 +26,13 @@ const CourseForm = ({
     for (const [key, value] of Object.entries(errors)) {
       console.log(`${key}: ${value}`);
 
-       toast({
+      toast({
         title: value,
         status: 'warning',
         duration: 3000,
         isClosable: true,
-      })
+      });
     }
-
   }, [errors]);
 
   return (
@@ -69,7 +68,7 @@ const CourseForm = ({
           ))}
         </Select>
       </FormControl>
-
+      
       <FormControl>
         <FormLabel>Category</FormLabel>
         <Input
@@ -91,7 +90,7 @@ const CourseForm = ({
 CourseForm.propTypes = {
   authors: PropTypes.array.isRequired,
   course: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,

@@ -1,0 +1,297 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets submit button label 'Save' when saving is false 1`] = `
+<form
+  className="css-0"
+  onSubmit={[MockFunction]}
+>
+  <h2
+    className="chakra-heading css-mz9qt7"
+  >
+    Edit
+     Course
+  </h2>
+  <div
+    className="chakra-form-control css-1kxonj9"
+    role="group"
+  >
+    <label
+      className="chakra-form__label css-1ig2arj"
+      htmlFor="field-7"
+      id="field-7-label"
+    >
+      Title
+    </label>
+    <input
+      className="chakra-input css-0"
+      disabled={false}
+      id="field-7"
+      name="title"
+      onBlur={[Function]}
+      onChange={[MockFunction]}
+      onFocus={[Function]}
+      readOnly={false}
+      required={false}
+      type="text"
+      value="Securing React Apps with Auth0"
+    />
+  </div>
+  <div
+    className="chakra-form-control css-1kxonj9"
+    role="group"
+  >
+    <label
+      className="chakra-form__label css-1ig2arj"
+      htmlFor="field-8"
+      id="field-8-label"
+    >
+      Author
+    </label>
+    <div
+      className="chakra-select__wrapper css-42b2qy"
+    >
+      <select
+        className="chakra-select css-1p4gbel"
+        disabled={false}
+        id="field-8"
+        name="authorId"
+        onBlur={[Function]}
+        onChange={[MockFunction]}
+        onFocus={[Function]}
+        readOnly={false}
+        required={false}
+        value={1}
+      >
+        <option
+          value=""
+        >
+          Select author
+        </option>
+        <option
+          value={1}
+        >
+          Cory House
+        </option>
+        <option
+          value={2}
+        >
+          Scott Allen
+        </option>
+        <option
+          value={3}
+        >
+          Dan Wahlin
+        </option>
+        <option
+          value={4}
+        >
+          Harvey Specter
+        </option>
+      </select>
+      <div
+        className="chakra-select__icon-wrapper css-gghxvr"
+      >
+        <svg
+          aria-hidden={true}
+          className="chakra-select__icon"
+          focusable={false}
+          role="presentation"
+          style={
+            Object {
+              "color": "currentColor",
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="chakra-form-control css-1kxonj9"
+    role="group"
+  >
+    <label
+      className="chakra-form__label css-1ig2arj"
+      htmlFor="field-9"
+      id="field-9-label"
+    >
+      Category
+    </label>
+    <input
+      className="chakra-input css-0"
+      disabled={false}
+      id="field-9"
+      name="category"
+      onBlur={[Function]}
+      onChange={[MockFunction]}
+      onFocus={[Function]}
+      readOnly={false}
+      required={false}
+      type="text"
+      value="JavaScript"
+    />
+  </div>
+  <button
+    className="chakra-button css-ulauzm"
+    disabled={false}
+    type="submit"
+  >
+    Save
+  </button>
+</form>
+`;
+
+exports[`sets submit button label 'Saving...' when saving is true 1`] = `
+<form
+  className="css-0"
+  onSubmit={[MockFunction]}
+>
+  <h2
+    className="chakra-heading css-mz9qt7"
+  >
+    Edit
+     Course
+  </h2>
+  <div
+    className="chakra-form-control css-1kxonj9"
+    role="group"
+  >
+    <label
+      className="chakra-form__label css-1ig2arj"
+      htmlFor="field-1"
+      id="field-1-label"
+    >
+      Title
+    </label>
+    <input
+      className="chakra-input css-0"
+      disabled={false}
+      id="field-1"
+      name="title"
+      onBlur={[Function]}
+      onChange={[MockFunction]}
+      onFocus={[Function]}
+      readOnly={false}
+      required={false}
+      type="text"
+      value="Securing React Apps with Auth0"
+    />
+  </div>
+  <div
+    className="chakra-form-control css-1kxonj9"
+    role="group"
+  >
+    <label
+      className="chakra-form__label css-1ig2arj"
+      htmlFor="field-2"
+      id="field-2-label"
+    >
+      Author
+    </label>
+    <div
+      className="chakra-select__wrapper css-42b2qy"
+    >
+      <select
+        className="chakra-select css-1p4gbel"
+        disabled={false}
+        id="field-2"
+        name="authorId"
+        onBlur={[Function]}
+        onChange={[MockFunction]}
+        onFocus={[Function]}
+        readOnly={false}
+        required={false}
+        value={1}
+      >
+        <option
+          value=""
+        >
+          Select author
+        </option>
+        <option
+          value={1}
+        >
+          Cory House
+        </option>
+        <option
+          value={2}
+        >
+          Scott Allen
+        </option>
+        <option
+          value={3}
+        >
+          Dan Wahlin
+        </option>
+        <option
+          value={4}
+        >
+          Harvey Specter
+        </option>
+      </select>
+      <div
+        className="chakra-select__icon-wrapper css-gghxvr"
+      >
+        <svg
+          aria-hidden={true}
+          className="chakra-select__icon"
+          focusable={false}
+          role="presentation"
+          style={
+            Object {
+              "color": "currentColor",
+              "height": "1em",
+              "width": "1em",
+            }
+          }
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="chakra-form-control css-1kxonj9"
+    role="group"
+  >
+    <label
+      className="chakra-form__label css-1ig2arj"
+      htmlFor="field-3"
+      id="field-3-label"
+    >
+      Category
+    </label>
+    <input
+      className="chakra-input css-0"
+      disabled={false}
+      id="field-3"
+      name="category"
+      onBlur={[Function]}
+      onChange={[MockFunction]}
+      onFocus={[Function]}
+      readOnly={false}
+      required={false}
+      type="text"
+      value="JavaScript"
+    />
+  </div>
+  <button
+    className="chakra-button css-ulauzm"
+    disabled={true}
+    type="submit"
+  >
+    Saving...
+  </button>
+</form>
+`;
