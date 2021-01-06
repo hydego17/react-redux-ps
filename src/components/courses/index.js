@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,35 +13,20 @@ import {
   Divider,
   Box,
   Text,
-  FormControl,
-  FormLabel,
-  Input,
+  Flex,
   Button,
 } from '@chakra-ui/react';
 
 import CourseList from './CourseList';
+import PreLoader from '../common/preloader';
 
 class CoursesPage extends Component {
-  // state = {
-  //   course: {
-  //     title: '',
-  //   },
-  // };
-
-  // handleChange = (e) => {
-  //   const course = { ...this.state.course, title: e.target.value };
-
-  //   this.setState({ course });
-  // };
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.actions.createCourse(this.state.course);
-  //   this.setState({ course: { title: '' } });
-  // };
+  state = {
+    redirectToAddCoursePage: false,
+  };
 
   componentDidMount() {
-    const {courses, authors, actions} = this.props;
+    const { courses, authors, actions } = this.props;
 
     if (courses.length === 0) {
       actions.loadCourses().catch((error) => {
@@ -55,38 +41,43 @@ class CoursesPage extends Component {
     }
   }
 
+  // handleDeleteCourse = (course) => {
+  //   this.props.actions.deleteCourse(course);
+  // };
+
   render() {
     return (
       <>
-        <Heading>Courses</Heading>
+        {/* Redirect to  */}
+        {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
+
+        <Flex justify="space-between" align="center">
+          <Flex align="center">
+            <Heading pr={6}>Courses</Heading>
+          </Flex>
+
+          <Button
+            onClick={() => this.setState({ redirectToAddCoursePage: true })}
+          >
+            Add Course
+          </Button>
+        </Flex>
         <Divider my={6} />
 
-        {/* <Box as="form" onSubmit={this.handleSubmit} py={6}>
-          <FormControl>
-            <FormLabel>Add Course</FormLabel>
-            <Input
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.course.title}
-            />
-          </FormControl>
-          <Button my={4} type="submit">
-            Save
-          </Button>
-        </Box> */}
-
-        <Box py={2} px={4} border="1px solid #ededed" rounded="xl">
-          {this.props.courses.length ? (
-            // this.props.courses.map((course, idx) => (
-            //   <Box key={idx} py={2} borderBottom="1px solid #ededed">
-            //     <Text>{course.title} </Text>
-            //   </Box>
-            // ))
-            <CourseList courses={this.props.courses} />
-          ) : (
-            <Text>No courses available </Text>
-          )}
-        </Box>
+        {this.props.loading ? (
+          <PreLoader />
+        ) : (
+          <Box py={2} px={4} border="1px solid #ededed" rounded="xl" overflowX="auto" >
+            {this.props.courses.length ? (
+              <CourseList
+                courses={this.props.courses}
+                deleteCourse={this.props.actions.deleteCourse}
+              />
+            ) : (
+              <Text>No courses available </Text>
+            )}
+          </Box>
+        )}
       </>
     );
   }
@@ -96,6 +87,7 @@ CoursesPage.propTypes = {
   courses: PropTypes.array,
   authors: PropTypes.array,
   actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -111,6 +103,7 @@ function mapStateToProps(state) {
             };
           }),
     authors: state.authors,
+    loading: state.apiCallsInProgress > 0,
   };
 }
 
@@ -118,6 +111,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadCourses: bindActionCreators(courseAction.loadCourses, dispatch),
+      deleteCourse: bindActionCreators(courseAction.deleteCourse, dispatch),
       loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
     },
   };

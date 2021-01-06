@@ -1,12 +1,13 @@
 import React from 'react';
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, Flex } from '@chakra-ui/react';
 
 import { NavLink } from 'react-router-dom';
 import { ColorModeSwitcher } from '../../themes/ColorModeSwitcher';
 
 export default function Header() {
   const activeStyle = {
-    color: 'Red',
+    // fontWeight: '600',
+    color: '#008891',
   };
 
   return (
@@ -18,23 +19,29 @@ export default function Header() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Box as="nav">
-          <NavLink to="/" exact activeStyle={activeStyle}>
-            Home
-          </NavLink>
+        <Flex as="nav" fontWeight={600} >
+          <Box pr={2}>
+            <NavLink to="/" exact activeStyle={activeStyle}>
+              Home
+            </NavLink>
+          </Box>
 
           {' | '}
 
-          <NavLink to="/courses" activeStyle={activeStyle}>
-            Courses
-          </NavLink>
+          <Box px={2}>
+            <NavLink to="/courses" activeStyle={activeStyle}>
+              Courses
+            </NavLink>
+          </Box>
 
           {' | '}
 
-          <NavLink to="/about" activeStyle={activeStyle}>
-            About
-          </NavLink>
-        </Box>
+          <Box px={2}>
+            <NavLink to="/about" activeStyle={activeStyle}>
+              About
+            </NavLink>
+          </Box>
+        </Flex>
 
         <ColorModeSwitcher />
       </Container>
