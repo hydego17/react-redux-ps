@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
+    "@types/jest": "^26.0.19",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
     "babel-preset-react-app": "7.0.2",
