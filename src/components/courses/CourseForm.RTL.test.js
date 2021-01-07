@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { cleanup, render } from 'react-testing-library';
 import CourseForm from './CourseForm';
@@ -25,8 +26,9 @@ it('Should render Add Course header', () => {
 });
 
 it('Should label save button as "Save" when not saving', () => {
-  const { getByText } = renderCourseForm();
+  const { getByText, debug } = renderCourseForm();
 
+  // debug();
   getByText('Save');
 });
 
