@@ -15,7 +15,7 @@
 
 | **Dependency**   | **Use**                                              |
 | ---------------- | ---------------------------------------------------- |
-| Chakra-UI        | CSS Framework                                        |
+| Chakra-UI        | CSS Framework (included Emotion & Framer Motion)                                       |
 | immer            | Helper for working with immutable data               |
 | prop-types       | Declare types for props passed into React components |
 | react            | React library                                        |
