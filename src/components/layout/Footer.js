@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <Box as="footer" p={6}>
       <Container maxW="4xl" p={0}>
-        <Text>Footer</Text>
+        <Text></Text>
       </Container>
     </Box>
   );
