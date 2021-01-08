@@ -32,19 +32,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       favicon: 'src/favicon.ico',
-      // minify: {
-      //   // see https://github.com/kangax/html-minifier#options-quick-reference
-      //   removeComments: true,
-      //   collapseWhitespace: true,
-      //   removeRedundantAttributes: true,
-      //   useShortDoctype: true,
-      //   removeEmptyAttributes: true,
-      //   removeStyleLinkTypeAttributes: true,
-      //   keepClosingSlash: true,
-      //   minifyJS: true,
-      //   minifyCSS: true,
-      //   minifyURLs: true,
-      // },
+      minify: {
+        // see https://github.com/kangax/html-minifier#options-quick-reference
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
     }),
   ],
   module: {
