@@ -36,4 +36,4 @@ build
 .DS_Store
 
 # json-server db
-# db.json
+db.json
