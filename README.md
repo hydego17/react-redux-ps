@@ -1,3 +1,16 @@
+## Script:
+
+`yarn start` --> run app in dev
+
+`yarn test` --> run test in dev
+
+`yarn build` --> local build with test & analyzer included
+
+
+
+
+
+
 ### Production Dependencies
 
 | **Dependency**   | **Use**                                              |
